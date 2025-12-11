@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+KITTY_CONFIG_DIR="$HOME/.config/kitty"
+FONTS_DIR="$HOME/.local/share/fonts"
+TEMP_DIR=$(mktemp -d)
+trap 'rm -rf "$TEMP_DIR"' EXIT
+
+echo "Criando diretórios necessários..."
+mkdir -p "$KITTY_CONFIG_DIR" "$FONTS_DIR"
+
+echo "Baixando configurações do kitty..."
+wget -q --show-progress -O "$KITTY_CONFIG_DIR/kitty.conf" \
+  https://github.com/amonetlol/nixos/raw/refs/heads/main/kitty/kitty.conf
+
+wget -q --show-progress -O "$KITTY_CONFIG_DIR/current-theme.conf" \
+  https://github.com/amonetlol/nixos/raw/refs/heads/main/kitty/current-theme.conf
+
+echo "Baixando a fonte Cousine..."
+wget -q --show-progress -O "$TEMP_DIR/Cousine.zip" \
+  https://github.com/amonetlol/nixos/raw/refs/heads/main/Cousine.zip
+
+echo "Extraindo e instalando a fonte..."
+unzip -qo "$TEMP_DIR/Cousine.zip" -d "$TEMP_DIR"
+find "$TEMP_DIR" -type f \( -iname "*.ttf" -o -iname "*.otf" \) -exec mv {} "$FONTS_DIR"/ \; 2>/dev/null || true
+
+echo "Atualizando cache de fontes..."
+fc-cache -fv
+
+echo
+echo "Tudo pronto! Kitty configurado e fonte Cousine instalada."
+echo "Reinicie o terminal ou rode: kitty @ reload-config"

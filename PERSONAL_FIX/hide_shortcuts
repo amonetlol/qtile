@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Lista de "nomes-base" dos .desktop (podem não coincidir 1:1 com o binário)
+apps=(
+  "btop"
+  "htop"
+  "avahi-discover"
+  "picom"
+  "nvim"
+  "alacritty"
+  "rofi-theme-selector"
+  "bvnc"
+  "bssh"
+  "arandr"
+  "vim"
+  "ranger"
+  "kitty"
+  "kvantummanager"
+  "meld"
+  "qt5ct"
+  "qt6ct"
+  "qv4l2"
+  "qvidcap"
+  "stoken-gui"
+  "stoken-gui-small"
+  "tint2"
+  "yad-settings"
+  "org.gnome.Extensions"
+  "fish"
+  "yad-icon-browser"
+  "micro"
+  "org.gnome.Yelp"
+  "org.gnome.Tour"
+  "org.gnome.Evolution"
+  "org.gnome.Characters"
+  "org.gnome.SoundRecorder"
+  "nixos-manual"
+)
+
+dest="${HOME}/.local/share/applications"
+mkdir -p "${dest}"
+
+# Diretórios-padrão caso XDG_DATA_DIRS não esteja setado
+IFS=':' read -r -a XDG_DIRS <<< "${XDG_DATA_DIRS:-/run/current-system/sw/share:/usr/local/share:/usr/share}"
+
+# Ativa globs case-insensitive
+shopt -s nocaseglob nullglob
+
+found_any=0
+
+for app in "${apps[@]}"; do
+  found_file=""
+  # 1) Tenta nome exato
+  for base in "${XDG_DIRS[@]}"; do
+    cand="${base}/applications/${app}.desktop"
+    if [[ -f "$cand" ]]; then
+      found_file="$cand"
+      break
+    fi
+  done
+
+  # 2) Se não achou, tenta por padrão *app*.desktop (case-insensitive)
+  if [[ -z "$found_file" ]]; then
+    for base in "${XDG_DIRS[@]}"; do
+      for cand in "${base}/applications/"*"$app"*.desktop; do
+        if [[ -f "$cand" ]]; then
+          found_file="$cand"
+          break
+        fi
+      done
+      [[ -n "$found_file" ]] && break
+    done
+  fi
+
+  if [[ -n "$found_file" ]]; then
+    found_any=1
+    fname="$(basename "$found_file")"
+    # Copia mantendo permissões de leitura
+    install -m 0644 -D "$found_file" "${dest}/${fname}"
+
+    # Força NoDisplay=true (sem duplicar)
+    if grep -qE '^NoDisplay=' "${dest}/${fname}"; then
+      sed -i 's/^NoDisplay=.*/NoDisplay=true/' "${dest}/${fname}"
+    else
+      printf '\nNoDisplay=true\n' >> "${dest}/${fname}"
+    fi
+
+    echo "Ocultado: ${fname}"
+  else
+    echo "Não encontrei .desktop para: ${app}"
+  fi
+done
+
+shopt -u nocaseglob nullglob
+
+if [[ "$found_any" -eq 0 ]]; then
+  cat <<'EOF'
+⚠️ Não foi encontrado nenhum .desktop.
+Dicas:
+  - Verifique os nomes reais dos .desktop:
+      ls /run/current-system/sw/share/applications | grep -i <termo>
+  - Apps via Flatpak ficam em:
+      /var/lib/flatpak/exports/share/applications
+      ~/.local/share/flatpak/exports/share/applications
+    (esses caminhos já entram no XDG_DATA_DIRS se o ambiente estiver correto)
+EOF
+fi

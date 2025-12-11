@@ -1,0 +1,61 @@
+firefox
+qtile
+psutil
+dbus-next
+
+wget
+  neovim
+  git
+  kitty
+  rofi
+  firefox
+  scrot
+  xclip
+  nitrogen
+  dunst
+  alsa-utils
+  alacritty
+  stow
+  picom
+  unzip
+  fastfetch
+  eza
+  duf
+  starship
+  btop
+  ripgrep
+  gcc
+  luarocks
+  ripgrep
+  lazygit
+  pmenu
+  dmenu
+  maim
+  qview
+  loupe
+  mousepad
+  vscode
+numlockx
+  
+  # Thunar
+  xfce.thunar
+  xfce.thunar-volman
+  xfce.thunar-archive-plugin
+
+
+  # nautilus
+  nautilus
+  nautilus-open-any-terminal
+  gvfs
+  file-roller
+  zip
+  unzip
+  p7zip
+  unrar
+  #nwg-look
+  xdg-user-dirs  #ativando -> Terminal: xdg-user-dirs-update
+  polkit_gnome
+
+Rice:
+sddm
+sddm-sugar-dark

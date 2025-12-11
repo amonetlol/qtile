@@ -1,0 +1,20 @@
+/***
+ *    ┏┓┏┓┓ ┏┓┳┓┏┓
+ *    ┃ ┃┃┃ ┃┃┣┫┗┓
+ *    ┗┛┗┛┗┛┗┛┛┗┗┛
+ *          Tokyonight colors
+ */
+/*--------Color definitions------------*/
+* {
+       background:                 #1A1B26;
+       background-alpha:           #1A1B26D3;
+       background-alt:             #292E42;
+       background-alt-alpha:       #292E42D3;
+       foreground:                 #C0CAF5;
+       border-color:               #FF9E64;
+       selected:                   #C7A9FF;
+       selected-alpha:             #C7A9FFD3;
+       selected-text:              #1A1B26;
+       active:                     #31748F;
+       urgent:                     #FF899D;
+}

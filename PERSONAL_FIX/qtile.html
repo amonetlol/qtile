@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qtile Keybinds</title>
+    <style>
+        /* Variáveis de Cores (baseadas na sua config) */
+        :root {
+            --bg-color: #1A1B26;    /* Background Geral */
+            --fg-color: #C0CAF5;    /* Foreground/Texto principal */
+            --header-color: #7DCFFF; /* Cabeçalho e Borda de Foco */
+            --mod-key: #FF9E64;     /* Cor da tecla MOD (Super/Windows) */
+            --group-bg: #292E42;    /* Background da seção de grupos */
+        }
+
+        body {
+            font-family: 'GeistMono Nerd Font Propo', monospace;
+            background-color: var(--bg-color);
+            color: var(--fg-color);
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: var(--header-color);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--group-bg);
+            padding-bottom: 10px;
+        }
+
+        .keybind-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        .keybind-section {
+            background-color: var(--group-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            color: var(--mod-key);
+            font-size: 1.5em;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--bg-color);
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px; /* Espaço entre as linhas */
+        }
+
+        td {
+            padding: 8px 10px;
+            vertical-align: top;
+            font-size: 0.9em;
+        }
+
+        .key-sequence {
+            color: var(--header-color);
+            font-weight: bold;
+            white-space: nowrap;
+            width: 30%; /* Para alinhar melhor a coluna de atalhos */
+        }
+
+        .key-sequence .key-mod {
+            color: var(--mod-key);
+            margin-right: 2px;
+        }
+        
+        .key-sequence .key-func {
+            background-color: var(--bg-color);
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--header-color);
+        }
+
+        .key-description {
+            color: var(--fg-color);
+            opacity: 0.9;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .keybind-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Qtile Keybinds - Configuração por bugs</h1>
+
+    <div class="keybind-container">
+
+        <div class="keybind-section">
+            <h2>💻 Essenciais</h2>
+            <table>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">Return</span></td>
+                    <td class="key-description">Abrir Terminal (<span class="key-mod">kitty</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">d</span></td>
+                    <td class="key-description">Abrir Launcher (<span class="key-mod">rofi -show drun</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">w</span></td>
+                    <td class="key-description">Abrir Navegador Web (<span class="key-mod">firefox</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">e</span></td>
+                    <td class="key-description">Abrir Explorador de Arquivos (<span class="key-mod">thunar</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">b</span></td>
+                    <td class="key-description">Alternar Visibilidade da Barra (hide/show)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">Tab</span></td>
+                    <td class="key-description">Alternar Layout</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">q</span></td>
+                    <td class="key-description">Fechar Janela Focada</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-mod">Shift</span> + <span class="key-func">r</span></td>
+                    <td class="key-description">Recarregar Configuração do Qtile</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">r</span></td>
+                    <td class="key-description">Abrir Prompt de Comando (widget)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-mod">Alt</span> + <span class="key-func">x</span></td>
+                    <td class="key-description">Menu de Logout (<span class="key-mod">pmenu</span>)</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="keybind-section">
+            <h2>🪟 Gerenciamento de Janelas</h2>
+            <table>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">h/l/j/k</span></td>
+                    <td class="key-description">Mover Foco (Esquerda/Direita/Baixo/Cima)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">space</span></td>
+                    <td class="key-description">Mover foco para a próxima janela na pilha</td>
+                </tr>
+
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-mod">Shift</span> + <span class="key-func">h/l/j/k</span></td>
+                    <td class="key-description">Mover Janela (Shuffle) Esquerda/Direita/Baixo/Cima</td>
+                </tr>
+
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">equal/=</span></td>
+                    <td class="key-description">Aumentar Tamanho (Grow/Grow Left)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">minus/-</span></td>
+                    <td class="key-description">Diminuir Tamanho (Shrink/Grow Right)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">n</span></td>
+                    <td class="key-description">Normalizar/Redefinir o tamanho de todas as janelas</td>
+                </tr>
+
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">f</span></td>
+                    <td class="key-description">Alternar Tela Cheia (Fullscreen)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">t</span></td>
+                    <td class="key-description">Alternar Flutuante (Floating)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-mod">Shift</span> + <span class="key-func">m</span></td>
+                    <td class="key-description">Minimizar/Restaurar todas as janelas (Grupo atual)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">m</span></td>
+                    <td class="key-description">Alternar entre tamanho Mínimo/Máximo (Monad layouts)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="keybind-section">
+            <h2>📑 ScratchPads & Grupos</h2>
+            <table>
+                <tr><td colspan="2"><h3>ScratchPads (Drop-Downs)</h3></td></tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">Ctrl</span> + <span class="key-func">1</span></td>
+                    <td class="key-description">Alternar Terminal (<span class="key-mod">SPTERM</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">Ctrl</span> + <span class="key-func">2</span></td>
+                    <td class="key-description">Alternar Calculadora (<span class="key-mod">SPCALC</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">Ctrl</span> + <span class="key-func">3</span></td>
+                    <td class="key-description">Alternar Seletor de Wallpaper (<span class="key-mod">SPWALL</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">Ctrl</span> + <span class="key-func">4</span></td>
+                    <td class="key-description">Alternar Gerenciador de Arquivos (<span class="key-mod">SPFM</span>)</td>
+                </tr>
+                <tr><td colspan="2"><h3>Grupos (Workspaces)</h3></td></tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">0-9</span></td>
+                    <td class="key-description">Mudar para o Grupo <span class="key-mod">0-9</span></td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-mod">Shift</span> + <span class="key-func">0-9</span></td>
+                    <td class="key-description">Mover janela para o Grupo <span class="key-mod">0-9</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="keybind-section">
+            <h2>⚙️ Funções & Multimídia</h2>
+            <table>
+                <tr>
+                    <td class="key-sequence"><span class="key-func">Print</span></td>
+                    <td class="key-description">Menu de Screenshot (<span class="key-mod">maimshot</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-func">XF86AudioUp/Down/Mute</span></td>
+                    <td class="key-description">Controle de Volume (Aumentar/Diminuir/Mute)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-func">XF86MonBrightnessUp/Down</span></td>
+                    <td class="key-description">Controle de Brilho</td>
+                </tr>
+
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">; (Semicolon)</span></td>
+                    <td class="key-description">Menu de Emoji (<span class="key-mod">rofiunicode</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">f1/f2</span></td>
+                    <td class="key-description">Menu Mounter/Unmounter de Drives</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">f3</span></td>
+                    <td class="key-description">Menu de Wallpaper (<span class="key-mod">wallpapermenu</span>)</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">f4</span></td>
+                    <td class="key-description">Menu de Ações do Dunst</td>
+                </tr>
+
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">. (Period)</span></td>
+                    <td class="key-description">Mover foco para o próximo monitor</td>
+                </tr>
+                <tr>
+                    <td class="key-sequence"><span class="key-mod">MOD</span> + <span class="key-func">, (Comma)</span></td>
+                    <td class="key-description">Mover foco para o monitor anterior</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>
