@@ -35,7 +35,7 @@ packages="
   firefox
   scrot
   xclip
-  nitrogen
+  #nitrogen
   dunst
   alsa-utils
   alacritty
@@ -85,6 +85,7 @@ packages="
   npm
   nodejs
   fd
+  feh
 "
 
 vm(){
