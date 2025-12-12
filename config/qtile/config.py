@@ -67,6 +67,7 @@ def maximize_by_switching_layout(qtile):
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Terminal"),
     Key([mod], "d", lazy.spawn(myLauncher), desc='Run Launcher'),
     Key([mod], "w", lazy.spawn(myBrowser), desc='Web browser'),
     Key([mod], "e", lazy.spawn(myExplorer), desc='Nautilus'),
