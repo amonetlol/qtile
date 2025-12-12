@@ -42,8 +42,8 @@ for item in "$DOTFILES_DIR/config"/*/; do
 done
 
 # 2. bin → ~/.bin
-if [[ -d "$DOTFILES_DIR/config/bin" ]]; then
-    link "$DOTFILES_DIR/config/bin" "$HOME/.bin"
+if [[ -d "$DOTFILES_DIR/bin" ]]; then
+    link "$DOTFILES_DIR/bin" "$HOME/.bin"
     # Torna todos os scripts executáveis
     find "$HOME/.bin" -type f -exec chmod +x {} \; 2>/dev/null || true
 fi
