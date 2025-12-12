@@ -9,7 +9,6 @@ configuration{
     hide-scrollbar: false;
     display-drun: "    Run  ";
     sidebar-mode: false;
-    lines: 16;
 }
 
 @theme "catppuccin-mocha"
