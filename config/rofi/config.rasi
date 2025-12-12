@@ -1,6 +1,6 @@
 configuration{
-    modi: "drun";
-    icon-theme: "Papirus";
+     modi: "drun";
+    icon-theme: "McMuse-blue";
     show-icons: true;
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
@@ -9,6 +9,7 @@ configuration{
     hide-scrollbar: false;
     display-drun: "    Run  ";
     sidebar-mode: false;
+    lines: 16;
 }
 
 @theme "catppuccin-mocha"
