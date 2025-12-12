@@ -15,7 +15,6 @@ wget
   dunst
   alsa-utils
   alacritty
-  stow
   picom
   unzip
   fastfetch
@@ -52,7 +51,8 @@ numlockx
   unzip
   p7zip
   unrar
-  #nwg-look
+  bat
+  nwg-look
   xdg-user-dirs  #ativando -> Terminal: xdg-user-dirs-update
   polkit_gnome
 
@@ -61,7 +61,7 @@ sddm
 sddm-sugar-dark
 
 xdotool
-jq xxhsum xwallpaper imagemagick findutils coreutils bc
+jq xxhsum xwallpaper imagemagick findutils coreutils bc lua51 python-pipenv python-nvim tree-sitter-cli npm nodejs fd
 
 # Arch
 yay -S --needed \
@@ -74,13 +74,8 @@ yay -S --needed \
   fuse2 \
   gtkmm3 \
   ttf-jetbrains-mono-nerd \
-  ttf-ibm-plex-git \
-  ttf-nerd-fonts-symbols \
-  ttf-nerd-fonts-symbols-mono \
-  ttf-mononoki-nerd \
-  mononoki-nerd \
-  ttf-geist-mono-nerd \
-  ttf-cousine-nerd
+
+
 
 
 
