@@ -40,6 +40,7 @@ numlockx
   xfce.thunar
   xfce.thunar-volman
   xfce.thunar-archive-plugin
+  file-roller
 
 
   # nautilus
@@ -77,5 +78,6 @@ yay -S --needed \
   mononoki-nerd \
   ttf-geist-mono-nerd \
   ttf-cousine-nerd
+
 
 
