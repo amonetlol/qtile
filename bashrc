@@ -24,6 +24,7 @@ alias clean='sudo nix-collect-garbage -d'
 alias cls='sudo nix-collect-garbage -d && sudo nixos-rebuild switch --upgrade'
 alias xprop='xprop WM_CLASS | grep WM_CLASS'
 alias win='rofi -show window'
+alias fix='~/.bin/fix_resolution'
 
 # Expand the history size
 export HISTFILESIZE=10000
