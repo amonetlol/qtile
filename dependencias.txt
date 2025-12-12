@@ -1,7 +1,7 @@
 firefox
 qtile
-psutil
-dbus-next
+psutil # python-psutil
+dbus-next # python-dbus-next 
 
 wget
   neovim
@@ -31,10 +31,9 @@ wget
   pmenu
   dmenu
   maim
-  qview
   loupe
   mousepad
-  vscode
+  vscode # visual-studio-code-bin
 numlockx
   
   # Thunar
@@ -54,8 +53,16 @@ numlockx
   unrar
   #nwg-look
   xdg-user-dirs  #ativando -> Terminal: xdg-user-dirs-update
-  polkit_gnome
+  polkit_gnome # polkit-gnome
 
 Rice:
 sddm
 sddm-sugar-dark
+
+# Arch
+reflector
+rsync
+xorg-xrandr
+fuse2
+gtkmm3
+
