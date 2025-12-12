@@ -58,10 +58,21 @@ if [[ -d "$DOTFILES_DIR/local/share/rofi" ]]; then
     link "$DOTFILES_DIR/local/share/rofi" "$HOME/.local/share/rofi"
 fi
 
-# 5. .bashrc na raiz do repositório → ~/.bashrc
+# 5. .bashrc na raiz do repositório → ~/.bashrc (sempre com backup)
 if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
-    link "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
-    echo -e "${YELLOW}Dica:${NC} Para aplicar o .bashrc agora, rode:  source ~/.bashrc"
+    BASHRC_DEST="$HOME/.bashrc"
+
+    # Se já existir (arquivo ou symlink), faz backup com data/hora
+    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST"; then
+        echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S)"
+        mv "$BASHRC_DEST" "$BASHRC_DEST.bak.$(date +%Y%m%d_%H%M%S)"
+    fi
+
+    # Cria o symlink novo
+    ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
+    echo -e "${GREEN}Link${NC}   ~/.bashrc → $DOTFILES_DIR/.bashrc"
+
+    echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
 fi
 
 # 6. sddm.conf → /etc/sddm.conf
