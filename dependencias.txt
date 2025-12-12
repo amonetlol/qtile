@@ -33,7 +33,7 @@ wget
   maim
   loupe
   mousepad
-  vscode # visual-studio-code-bin
+  vscode # 
 numlockx
   
   # Thunar
@@ -53,16 +53,29 @@ numlockx
   unrar
   #nwg-look
   xdg-user-dirs  #ativando -> Terminal: xdg-user-dirs-update
-  polkit_gnome # polkit-gnome
+  polkit_gnome
 
 Rice:
 sddm
 sddm-sugar-dark
 
 # Arch
-reflector
-rsync
-xorg-xrandr
-fuse2
-gtkmm3
+yay -S --needed \
+  visual-studio-code-bin \
+  polkit-gnome \
+  pavucontrol \
+  reflector \
+  rsync \
+  xorg-xrandr \
+  fuse2 \
+  gtkmm3 \
+  ttf-jetbrains-mono-nerd \
+  ttf-ibm-plex-git \
+  ttf-nerd-fonts-symbols \
+  ttf-nerd-fonts-symbols-mono \
+  ttf-mononoki-nerd \
+  mononoki-nerd \
+  ttf-geist-mono-nerd \
+  ttf-cousine-nerd
+
 
