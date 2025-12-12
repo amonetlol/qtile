@@ -1,5 +1,5 @@
 #!/bin/sh
-nitrogen --restore &
+#nitrogen --restore &
 #picom &
 vmware-user suid wrapper &
 numlockx &
