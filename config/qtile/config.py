@@ -24,6 +24,8 @@ myBrowser   = "firefox"                   # My browser of choice
 myEditor    = "kitty -e nvim"            # My editor of choice
 myLauncher  = "rofi -show drun"            # My launcher of choice
 myExplorer  = "thunar"
+WALLPAPER= os.path.expanduser("~/.config/qtile/wall.png")
+
 
 #---------------------- Define useful functions ----------------------#
 
@@ -505,7 +507,10 @@ def init_widgets_screen1():
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=44))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=44),
+    wallpaper=WALLPAPER,          
+    wallpaper_mode="fill",        # fill, stretch, fit → o que preferir
+    )]
 
 screens = init_screens()
 
