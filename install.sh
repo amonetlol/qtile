@@ -64,6 +64,15 @@ if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     echo -e "${YELLOW}Dica:${NC} Para aplicar o .bashrc agora, rode:  source ~/.bashrc"
 fi
 
+# 6. sddm.conf → /etc/sddm.conf
+if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
+    SDDM_DEST="/etc/sddm.conf"
+    echo -e "${GREEN}Copiando${NC} sddm.conf para o sistema..."
+    sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
+    echo -e "${GREEN}feito${NC}   $SDDM_DEST atualizado"
+    echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
+fi
+
 echo -e "${GREEN}"
 echo "Tudo pronto!"
 echo "Reinicie o Qtile (Super + Ctrl + R) ou faça logout/login para aplicar as mudanças."
