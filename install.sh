@@ -58,6 +58,12 @@ if [[ -d "$DOTFILES_DIR/local/share/rofi" ]]; then
     link "$DOTFILES_DIR/local/share/rofi" "$HOME/.local/share/rofi"
 fi
 
+# 5. .bashrc na raiz do repositório → ~/.bashrc
+if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
+    link "$DOTFILES_DIR/.bashrc" "$HOME/.bashrc"
+    echo -e "${YELLOW}Dica:${NC} Para aplicar o .bashrc agora, rode:  source ~/.bashrc"
+fi
+
 echo -e "${GREEN}"
 echo "Tudo pronto!"
 echo "Reinicie o Qtile (Super + Ctrl + R) ou faça logout/login para aplicar as mudanças."
