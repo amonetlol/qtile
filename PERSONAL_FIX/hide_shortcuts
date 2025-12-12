@@ -41,6 +41,7 @@ apps=(
   "thunar-bulk-rename"
   "thunar-settings"
   "thunar-volman-settings"
+  "rofi"
 )
 
 dest="${HOME}/.local/share/applications"
