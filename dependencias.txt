@@ -60,6 +60,9 @@ Rice:
 sddm
 sddm-sugar-dark
 
+xdotool
+jq xxhsum xwallpaper imagemagick findutils coreutils bc
+
 # Arch
 yay -S --needed \
   visual-studio-code-bin \
@@ -78,6 +81,7 @@ yay -S --needed \
   mononoki-nerd \
   ttf-geist-mono-nerd \
   ttf-cousine-nerd
+
 
 
 
