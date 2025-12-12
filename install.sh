@@ -36,7 +36,7 @@ for item in "$DOTFILES_DIR/config"/*/; do
     nome=$(basename "$item")
 
     # Ignora essas pastas
-    [[ "$nome" == "bin" || "$nome" == "dependencias" || "$nome" == "PERSONAL_FIX" ]] && continue
+    [[ "$nome" == "dependencias" || "$nome" == "PERSONAL_FIX" ]] && continue
 
     link "$item" "$HOME/.config/$nome"
 done
