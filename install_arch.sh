@@ -86,6 +86,7 @@ packages="
   nodejs
   fd
   feh
+  qtile
 "
 
 vm(){
