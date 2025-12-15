@@ -57,7 +57,7 @@ fi
 if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     BASHRC_DEST="$HOME/.bashrc"
     # Se já existir (arquivo ou symlink), faz backup com data/hora
-    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST"; then
+    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST" ]]; then
         echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S)"
         mv "$BASHRC_DEST" "$BASHRC_DEST.bak.$(date +%Y%m%d_%H%M%S)"
     fi
@@ -65,10 +65,6 @@ if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
     echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
-    # set alias
-    curl -sSLo "$DOTFILES_DIR/.aliases.sh" https://github.com/amonetlol/arch/raw/refs/heads/main/aliases.sh
-    ln -sf "$DOTFILES_DIR/.aliases.sh" "~/.aliases.sh"
-    echo 'source ~/.aliases.sh' >> ~/.bashrc
 fi
 # 6. sddm.conf → /etc/sddm.conf
 if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
@@ -76,9 +72,24 @@ if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
     echo -e "${GREEN}Copiando${NC} sddm.conf para o sistema..."
     sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
     echo -e "${GREEN}feito${NC} $SDDM_DEST atualizado"
-    sudo systemctl enable sddm
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
 fi
+# 7. Instalando fonts
+echo -e "${GREEN}Instalando fonts do amonetilol/fonts...${NC}"
+if [[ -d "$HOME/.fonts" && -d "$HOME/.fonts/.git" ]]; then
+    echo -e "${YELLOW}Pasta ~/.fonts já existe (repositório git detectado). Atualizando...${NC}"
+    git -C "$HOME/.fonts" pull
+else
+    if [[ -d "$HOME/.fonts" ]]; then
+        echo -e "${YELLOW}Backup${NC} ~/.fonts → ~/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
+        mv "$HOME/.fonts" "$HOME/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
+    fi
+    echo -e "${GREEN}Clonando${NC} https://github.com/amonetilol/fonts em ~/.fonts"
+    git clone https://github.com/amonetilol/fonts "$HOME/.fonts"
+fi
+echo -e "${GREEN}Atualizando cache de fontes...${NC}"
+fc-cache -vf
+
 echo -e "${GREEN}"
 echo "Tudo pronto!"
 echo "Reinicie o Qtile (Super + Ctrl + R) ou faça logout/login para aplicar as mudanças."
