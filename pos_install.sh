@@ -65,6 +65,10 @@ if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
     echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
+    # set alias
+    curl -sSLo "$DOTFILES_DIR/.aliases.sh" https://github.com/amonetlol/arch/raw/refs/heads/main/aliases.sh
+    ln -sf "$DOTFILES_DIR/.aliases.sh" "~/.aliases.sh"
+    echo 'source ~/.aliases.sh' >> ~/.bashrc
 fi
 # 6. sddm.conf → /etc/sddm.conf
 if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
