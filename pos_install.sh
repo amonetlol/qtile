@@ -77,7 +77,7 @@ if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
 fi
 # 7. Instalando fonts
-echo -e "${GREEN}Instalando fonts do amonetilol/fonts...${NC}"
+echo -e "${GREEN}Instalando fonts do amonetlol/fonts...${NC}"
 if [[ -d "$HOME/.fonts" && -d "$HOME/.fonts/.git" ]]; then
     echo -e "${YELLOW}Pasta ~/.fonts já existe (repositório git detectado). Atualizando...${NC}"
     git -C "$HOME/.fonts" pull
@@ -87,7 +87,7 @@ else
         mv "$HOME/.fonts" "$HOME/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
     fi
     echo -e "${GREEN}Clonando${NC} https://github.com/amonetilol/fonts em ~/.fonts"
-    git clone https://github.com/amonetilol/fonts "$HOME/.fonts"
+    git clone https://github.com/amonetlol/fonts "$HOME/.fonts"
 fi
 echo -e "${GREEN}Atualizando cache de fontes...${NC}"
 fc-cache -vf
