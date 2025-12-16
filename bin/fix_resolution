@@ -2,6 +2,8 @@
 # ~/.bin/fix_resolution  (ou onde você preferir colocar)
 set -euo pipefail
 
+feh --randomize --bg-fill ~/walls/wall1.jpg
+
 CURRENT=$(xrandr --query | grep ' connected primary' | grep -oP '\d+x\d+' | head -1)
 
 if [[ "$CURRENT" == "1920x1080" ]]; then
