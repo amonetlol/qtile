@@ -94,13 +94,14 @@ fc-cache -vf
 # 8.Fixes
 echo -e "${GREEN}FIXES...${NC}"
 ln -s "$HOME/.config/qtile/walls" "$HOME/walls"
-chmod +x "$DOTFILES_DIR/PERSONAL_FIX/hide_shortcuts"
-sh "$DOTFILES_DIR/PERSONAL_FIX/hide_shortcuts"
-# 9 Nvim
+# 9. Nvim
 echo -e "${GREEN}Nvim...${NC}"
 git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 nvim
+# 10. Hidden Applications
+cp "$DOTFILES_DIR/local/share/applications/*.desktop" "$HOME/.local/share/applications/"
+
 
 
 echo -e "${GREEN}"
