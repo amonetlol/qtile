@@ -63,9 +63,10 @@ if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     fi
     # Cria o symlink novo
     ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
-    ln -sf "$DOTFILES_DIR/.aliases" "$HOME/.aliases"
     echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
-    echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
+    ln -sf "$DOTFILES_DIR/.aliases" "$HOME/.aliases"
+    echo -e "${GREEN}Link${NC} ~/.aliase → $DOTFILES_DIR/.alise"
+    #echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
 fi
 # 6. sddm.conf → /etc/sddm.conf
 if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
@@ -74,7 +75,7 @@ if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
     sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
     echo -e "${GREEN}feito${NC} $SDDM_DEST atualizado"
     sudo systemctl enable sddm
-    echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
+    #echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
 fi
 # 7. Instalando fonts
 echo -e "${GREEN}Instalando fonts do amonetlol/fonts...${NC}"
@@ -86,14 +87,14 @@ else
         echo -e "${YELLOW}Backup${NC} ~/.fonts → ~/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
         mv "$HOME/.fonts" "$HOME/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
     fi
-    echo -e "${GREEN}Clonando${NC} https://github.com/amonetilol/fonts em ~/.fonts"
+    echo -e "${GREEN}Clonando${NC} https://github.com/amonetlol/fonts em ~/.fonts"
     git clone https://github.com/amonetlol/fonts "$HOME/.fonts"
 fi
 echo -e "${GREEN}Atualizando cache de fontes...${NC}"
 fc-cache -vf
 # 8.Fixes
-echo -e "${GREEN}FIXES...${NC}"
-ln -s "$HOME/.config/qtile/walls" "$HOME/walls"
+echo -e "${GREEN}Walls...${NC}"
+link "$HOME/.config/qtile/walls" "$HOME/walls"
 # 9. Nvim
 echo -e "${GREEN}Nvim...${NC}"
 git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
