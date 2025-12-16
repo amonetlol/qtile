@@ -41,6 +41,6 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
-
+source ~/.aliases
 export PATH="$HOME/.bin:$PATH"
 eval "$(starship init bash)"
