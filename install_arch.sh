@@ -32,10 +32,8 @@ packages="
   git
   kitty
   rofi
-  firefox
   scrot
   xclip
-  #nitrogen
   dunst
   alsa-utils
   alacritty
