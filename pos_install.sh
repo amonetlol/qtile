@@ -63,12 +63,9 @@ if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
     fi
     # Cria o symlink novo
     ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
+    ln -sf "$DOTFILES_DIR/.aliases" "$HOME/.aliases"
     echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
-    # set alias
-    curl -sSLo "$DOTFILES_DIR/.aliases.sh" https://github.com/amonetlol/arch/raw/refs/heads/main/aliases.sh
-    ln -sf "$DOTFILES_DIR/.aliases.sh" "~/.aliases.sh"
-    echo 'source ~/.aliases.sh' >> ~/.bashrc
 fi
 # 6. sddm.conf → /etc/sddm.conf
 if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
@@ -76,6 +73,7 @@ if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
     echo -e "${GREEN}Copiando${NC} sddm.conf para o sistema..."
     sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
     echo -e "${GREEN}feito${NC} $SDDM_DEST atualizado"
+    sudo systemctl enable sddm
     echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
 fi
 # 7. Instalando fonts
