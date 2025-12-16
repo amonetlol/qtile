@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# base-devel archlinux-keyring
+
 pre_install(){
     echo 'MAKEFLAGS="-j$(nproc)"' | sudo tee -a /etc/makepkg.conf
 }
