@@ -9,9 +9,5 @@ if ! pgrep -x "polkit-gnome-au" > /dev/null; then
 fi
 
 # ===== WALLPAPER ALEATÓRIO COM FEH =====
-#WALLPAPER_DIR="$HOME/.config/qtile/walls"   # ou essa se preferir
-#feh --randomize --bg-fill "$WALLPAPER_DIR" &
-
-# feh --randomize --bg-fill "/home/pio/.config/qtile/walls/"
-sh "$HOME/.fehbg" &
+setfeh.sh &
 
