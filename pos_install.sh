@@ -82,12 +82,16 @@ wget -q --show-progress -O ~/.fonts \
   https://github.com/amonetlol/fonts
 echo -e "${GREEN}Atualizando cache de fontes...${NC}"
 fc-cache -vf
-# Fixes
+# 8.Fixes
 echo -e "${GREEN}FIXES...${NC}"
 ln -s "$HOME/.config/qtile/walls" "$HOME/walls"
 chmod +x "$DOTFILES_DIR/PERSONAL_FIX/hide_shortcuts"
 sh "$DOTFILES_DIR/PERSONAL_FIX/hide_shortcuts"
 firefox "$DOTFILES_DIR/PERSONAL_FIX/qtile.html"
+# 9 Nvim
+git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+nvim
 
 
 echo -e "${GREEN}"
