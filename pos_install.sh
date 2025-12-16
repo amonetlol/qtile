@@ -101,7 +101,7 @@ git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 nvim
 # 10. Hidden Applications
-cp "$DOTFILES_DIR/local/share/applications/*.desktop" "$HOME/.local/share/applications/"
+link "$DOTFILES_DIR/local/share/applications" "$HOME/.local/share/applications"
 
 
 
