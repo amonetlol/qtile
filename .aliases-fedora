@@ -1,8 +1,8 @@
 # ~/.aliases-fedora
 # Aliases específicos para Fedora (dnf + rpm-ostree se for Silverblue/Kinoite)
 
-alias up='sudo dnf update -y'
-alias up2='sudo dnf upgrade -y'
+alias up2='sudo dnf update -y'
+alias upgrade='sudo dnf upgrade -y'
 alias up-all='sudo dnf update -y && sudo dnf autoremove -y'
 alias yin='sudo dnf install'
 alias yre='sudo dnf remove'
