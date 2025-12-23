@@ -33,12 +33,15 @@ elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
     DISTRO="arch"
 elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
     DISTRO="debian"
+elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
+    DISTRO="fedora"
 else
     DISTRO="unknown"
 fi
 
-# Carrega aliases comuns
-[ -f ~/.aliases ] && . ~/.aliases
+# Carrega aliases comuns (sempre)
+[[ -f ~/.aliases ]] && . ~/.aliases
+[[ -f ~/.aliases.sh ]] && . ~/.aliases.sh
 
 # Carrega aliases específicos da distro
 case $DISTRO in
@@ -51,12 +54,15 @@ case $DISTRO in
     nixos)
         [ -f ~/.aliases-nixos ] && . ~/.aliases-nixos
         ;;
+    fedora)
+        [ -f ~/.aliases-fedora ] && . ~/.aliases-fedora
+        ;;
     *)
         echo "[AVISO] Distro não reconhecida: $DISTRO"
         ;;
 esac
 
-# Debug (opcional, pode remover depois)
+# Debug (opcional – pode remover depois de testar)
 echo "[INFO] Distro detectada: $DISTRO"
 
 # Expand the history size
@@ -73,9 +79,6 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 # Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
 shopt -s histappend
 PROMPT_COMMAND='history -a'
-
-[[ -f ~/.aliases ]] && . ~/.aliases
-[[ -f ~/.aliases.sh ]] && . ~/.aliases.sh
 
 export PATH="$HOME/.bin:$PATH"
 eval "$(starship init bash)"
