@@ -123,4 +123,4 @@ esac
 
 # ─── Últimos aliases (sobrescrevem caso haja conflito) ──────────────────────
 
-alias cls='clear'           # o mais comum é limpar tela, então fica no final
+#alias cls='clear'           # o mais comum é limpar tela, então fica no final
