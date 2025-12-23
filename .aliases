@@ -1,7 +1,5 @@
-# ~/.aliases  (ou ~/.config/shell/aliases.sh)
-# 2025 - aliases adaptáveis por distribuição
-
-# ─── Aliases comuns a todas as distros ───────────────────────────────────────
+# ~/.aliases
+# Apenas aliases comuns (sem condicional)
 
 alias cp='cp -i'
 alias mv='mv -i'
@@ -34,93 +32,8 @@ alias inxi='inxi -Fxz'
 alias fv='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim'
 alias nf='nerdfetch'
 alias tx='gnome-text-editor'
-
-# Fastfetch
 alias ft='fastfetch --logo small'
 alias ft2='fastfetch --logo small -c ~/.config/fastfetch/Chris.jsonc'
-
-# eza / exa modern ls
 alias ls='eza -lah --color=always --group-directories-first --icons'
 alias ll='eza -lah --color=always --group-directories-first --icons'
-alias lr='eza -R --color=always --icons --oneline'
-alias lrv1='eza -R --color=always --icons --oneline --level=1'
-alias lrv2='eza -R --color=always --icons --oneline --level=2'
-alias ld='eza -lah --color=always --group-directories-first --icons --sort modified'
-alias tree='eza --tree --icons --group-directories-first'
-
-# Nvim
-alias nup='nvim --headless -c "Lazy update" -c "qa"'
-
-# Qtile
-alias qre='qtile cmd-obj -o cmd -f restart'
-alias qd='cd ~/.config/qtile && ll'
-
-# cd para pasta anterior
-alias bd='cd "$OLDPWD"'
-
-# ─── Detecção da distribuição ────────────────────────────────────────────────
-
-if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
-    DISTRO="nixos"
-elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
-    DISTRO="arch"
-elif grep -qiE 'ubuntu|debian' /etc/os-release 2>/dev/null || [[ -f /etc/debian_version ]]; then
-    DISTRO="debian"
-else
-    DISTRO="unknown"
-fi
-
-# ─── Aliases específicos por distribuição ────────────────────────────────────
-
-case $DISTRO in
-
-    arch)
-        # Arch Linux + yay
-        alias up2='yay -Syyu --noconfirm'
-        alias yay='yay --noconfirm'
-        alias yin='yay --noconfirm -S'
-        alias yse='yay -Ss'
-        alias ysel='yay -Qq | grep'
-        alias yre='yay --noconfirm -Rns'
-        alias yinfo='yay -Si'
-        alias cls='sudo pacman -Scc && yay -Sc'
-        alias rpac='sudo reflector --country Brazil --latest 10 --sort rate --save /etc/pacman.d/mirrorlist'
-        alias orf='sudo pacman -Qtdq | sudo pacman -Rns -'
-        ;;
-
-    debian)
-        # Debian / Ubuntu
-        alias up='sudo apt update && sudo apt upgrade -y'
-        alias up2='sudo apt update && sudo apt full-upgrade -y'
-        alias up-safe='sudo apt update && sudo apt upgrade'
-        alias up-all='sudo apt update && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt autoclean'
-        alias ins='sudo apt install'
-        alias rem='sudo apt remove --purge'
-        alias rem-auto='sudo apt autoremove --purge'
-        alias search='apt search'
-        alias show='apt show'
-        alias cls='sudo apt clean && sudo apt autoclean && sudo apt autoremove -y'
-        alias fix='sudo apt install -f'
-        alias dpkg-list='dpkg -l | grep'
-        ;;
-
-    nixos)
-        # NixOS
-        alias clean='sudo nix-collect-garbage -d'
-        alias cls='sudo nix-collect-garbage -d && sudo nixos-rebuild switch --upgrade'
-        alias up2='sudo nixos-rebuild switch --upgrade'
-        alias up='sudo nixos-rebuild switch'
-        alias ed='sudo nvim /etc/nixos/configuration.nix'
-        alias rebuild='sudo nixos-rebuild switch'
-        alias gc='sudo nix-collect-garbage --delete-older-than 14d'
-        alias nixup='sudo nix-channel --update && sudo nixos-rebuild switch --upgrade'
-        ;;
-
-    *)
-        alias up2='echo "Gerenciador de pacotes não reconhecido para esta distro"'
-        ;;
-esac
-
-# ─── Últimos aliases (sobrescrevem caso haja conflito) ──────────────────────
-
-#alias cls='clear'           # o mais comum é limpar tela, então fica no final
+# ... todos os outros comuns ...
