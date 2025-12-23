@@ -1,0 +1,22 @@
+# ~/.aliases-fedora
+# Aliases específicos para Fedora (dnf + rpm-ostree se for Silverblue/Kinoite)
+
+alias up='sudo dnf update -y'
+alias up2='sudo dnf upgrade -y'
+alias up-all='sudo dnf update -y && sudo dnf autoremove -y'
+alias ins='sudo dnf install'
+alias rem='sudo dnf remove'
+alias search='dnf search'
+alias show='dnf info'
+alias cls='sudo dnf clean all'
+alias autoremove='sudo dnf autoremove'
+alias fix='sudo dnf distro-sync --refresh && sudo dnf upgrade --refresh'
+alias list-installed='dnf list installed | grep'
+
+# Para Fedora Atomic (Silverblue, Kinoite, etc.) → opcional
+# alias rup='rpm-ostree upgrade'
+# alias rapply='rpm-ostree apply-live'
+# alias rreboot='systemctl reboot'
+
+# Alias similar ao "yse" do Arch (busca rápida)
+alias yse='dnf search'
