@@ -12,6 +12,6 @@ alias yse='apt search'
 alias yinfo='apt show'
 alias cls='sudo apt clean && sudo apt autoclean && sudo apt autoremove -y'
 alias ffix='sudo apt install -f'
-alias ysel='dpkg -l | grep'
+alias ysel='apt list --installed | grep -i'
 
 
