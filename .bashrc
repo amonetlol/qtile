@@ -63,7 +63,7 @@ case $DISTRO in
 esac
 
 # Debug (opcional – pode remover depois de testar)
-echo "[INFO] Distro detectada: $DISTRO"
+#echo "[INFO] Distro detectada: $DISTRO"
 
 # Expand the history size
 export HISTFILESIZE=10000
