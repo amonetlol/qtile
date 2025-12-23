@@ -87,6 +87,7 @@ packages="
   fd
   feh
   qtile
+  htop
 "
 
 vm(){
