@@ -4,7 +4,7 @@
 alias up2='sudo dnf update -y'
 alias upgrade='sudo dnf upgrade -y'
 alias up-all='sudo dnf update -y && sudo dnf autoremove -y'
-alias yin='sudo dnf install'
+alias yin='sudo dnf install -y'
 alias yre='sudo dnf remove'
 alias yse='dnf search'
 alias yinfo='dnf info'
