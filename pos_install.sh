@@ -197,7 +197,7 @@ install_configs
 install_bin
 install_starship
 install_rofi_themes
-install_shell_configs
+#install_shell_configs ## BUGADO
 #install_sddm
 install_fonts
 install_walls
