@@ -11,7 +11,7 @@ alias yre-auto='sudo apt autoremove --purge'
 alias yse='apt search'
 alias yinfo='apt show'
 alias cls='sudo apt clean && sudo apt autoclean && sudo apt autoremove -y'
-alias fix='sudo apt install -f'
+alias ffix='sudo apt install -f'
 alias ysel='dpkg -l | grep'
 
 
