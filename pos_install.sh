@@ -192,6 +192,7 @@ install_fonts
 install_walls
 install_nvim
 install_hidden_applications
+update_xdg_users
 
 # =============================================
 #                FINALIZAÇÃO
