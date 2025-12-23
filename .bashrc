@@ -22,6 +22,43 @@ alias xprop='xprop WM_CLASS | grep WM_CLASS'
 alias win='rofi -show window'
 alias fix='~/.bin/fix_resolution'
 
+# ─────────────────────────────────────────────────────────────────────────────
+# DETECÇÃO DA DISTRO + CARREGAMENTO DE ALIASES
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Detecta a distro
+if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
+    DISTRO="nixos"
+elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
+    DISTRO="arch"
+elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
+    DISTRO="debian"
+else
+    DISTRO="unknown"
+fi
+
+# Carrega aliases comuns
+[ -f ~/.aliases ] && . ~/.aliases
+
+# Carrega aliases específicos da distro
+case $DISTRO in
+    arch)
+        [ -f ~/.aliases-arch ] && . ~/.aliases-arch
+        ;;
+    debian)
+        [ -f ~/.aliases-debian ] && . ~/.aliases-debian
+        ;;
+    nixos)
+        [ -f ~/.aliases-nixos ] && . ~/.aliases-nixos
+        ;;
+    *)
+        echo "[AVISO] Distro não reconhecida: $DISTRO"
+        ;;
+esac
+
+# Debug (opcional, pode remover depois)
+echo "[INFO] Distro detectada: $DISTRO"
+
 # Expand the history size
 export HISTFILESIZE=10000
 export HISTSIZE=500
