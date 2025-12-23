@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-# install.sh — symlinks para o dotfiles do amonetilol/qtile
+# pos_install.sh — symlinks para o dotfiles do amonetlol/qtile
 set -euo pipefail
+
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
-echo -e "${GREEN}Instalando configs do amonetilol/qtile${NC}"
+
+# Global 
+# --------- INICIO -----------
 link() {
     local src="$1"
     local dest="$2"
@@ -22,90 +26,175 @@ link() {
     ln -sf "$src" "$dest"
     echo -e "${GREEN}Link${NC} $dest → $src"
 }
-# 1. Tudo que está dentro de config/ (exceto bin e starship.toml)
-for item in "$DOTFILES_DIR/config"/*/; do
-    item=${item%/}
-    nome=$(basename "$item")
-    # Ignora essas pastas
-    [[ "$nome" == "dependencias" || "$nome" == "PERSONAL_FIX" ]] && continue
-    link "$item" "$HOME/.config/$nome"
-done
 
-# === Adicionado: tornar executável o autostart.sh do qtile ===
-if [[ -f "$HOME/.config/qtile/src/autostart.sh" ]]; then
-    chmod +x "$HOME/.config/qtile/src/autostart.sh"
-    echo -e "${GREEN}Executável${NC} $HOME/.config/qtile/src/autostart.sh"
-fi
+# --------- FIM -----------
 
-# 2. bin → ~/.bin
-if [[ -d "$DOTFILES_DIR/bin" ]]; then
-    link "$DOTFILES_DIR/bin" "$HOME/.bin"
-    # Torna todos os scripts executáveis (duas formas: find + glob)
-    find "$HOME/.bin" -type f -exec chmod +x {} \; 2>/dev/null || true
-    chmod +x "$HOME/.bin"/* 2>/dev/null || true
-    echo -e "${GREEN}Executáveis${NC} todos os arquivos em ~/.bin"
-fi
-# 3. starship.toml (arquivo solto dentro de config/)
-if [[ -f "$DOTFILES_DIR/config/starship.toml" ]]; then
-    link "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
-fi
-# 4. local/share/rofi → ~/.local/share/rofi
-if [[ -d "$DOTFILES_DIR/local/share/rofi" ]]; then
-    link "$DOTFILES_DIR/local/share/rofi" "$HOME/.local/share/rofi"
-fi
-# 5. .bashrc na raiz do repositório → ~/.bashrc (sempre com backup)
-if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
-    BASHRC_DEST="$HOME/.bashrc"
-    # Se já existir (arquivo ou symlink), faz backup com data/hora
-    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST" ]]; then
-        echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S)"
-        mv "$BASHRC_DEST" "$BASHRC_DEST.bak.$(date +%Y%m%d_%H%M%S)"
+# =============================================
+#                FUNÇÕES
+# =============================================
+
+echo_header() {
+    echo -e "\n${GREEN}===== $1 =====${NC}"
+}
+
+install_configs() {
+    echo_header "Configurações gerais (.config)"
+    for item in "$DOTFILES_DIR/config"/*/; do
+        item=${item%/}
+        nome=$(basename "$item")
+        [[ "$nome" == "dependencias" || "$nome" == "PERSONAL_FIX" ]] && continue
+        link "$item" "$HOME/.config/$nome"
+    done
+
+    # autostart.sh do qtile
+    if [[ -f "$HOME/.config/qtile/src/autostart.sh" ]]; then
+        chmod +x "$HOME/.config/qtile/src/autostart.sh"
+        echo -e "${GREEN}Executável${NC} $HOME/.config/qtile/src/autostart.sh"
     fi
-    # Cria o symlink novo
-    ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
-    echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
-    ln -sf "$DOTFILES_DIR/.aliases" "$HOME/.aliases"
-    echo -e "${GREEN}Link${NC} ~/.aliase → $DOTFILES_DIR/.alise"
-    #echo -e "${YELLOW}Dica:${NC} Para aplicar agora → source ~/.bashrc"
-fi
-# 6. sddm.conf → /etc/sddm.conf
-if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
-    SDDM_DEST="/etc/sddm.conf"
-    echo -e "${GREEN}Copiando${NC} sddm.conf para o sistema..."
-    sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
-    echo -e "${GREEN}feito${NC} $SDDM_DEST atualizado"
-    sudo systemctl enable sddm
-    #echo -e "${YELLOW}Dica:${NC} Para aplicar agora → sudo systemctl restart sddm"
-fi
-# 7. Instalando fonts
-echo -e "${GREEN}Instalando fonts do amonetlol/fonts...${NC}"
-if [[ -d "$HOME/.fonts" && -d "$HOME/.fonts/.git" ]]; then
-    echo -e "${YELLOW}Pasta ~/.fonts já existe (repositório git detectado). Atualizando...${NC}"
-    git -C "$HOME/.fonts" pull
-else
-    if [[ -d "$HOME/.fonts" ]]; then
-        echo -e "${YELLOW}Backup${NC} ~/.fonts → ~/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
-        mv "$HOME/.fonts" "$HOME/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
+}
+
+install_bin() {
+    echo_header "Binários (~/.bin)"
+    if [[ -d "$DOTFILES_DIR/bin" ]]; then
+        link "$DOTFILES_DIR/bin" "$HOME/.bin"
+        find "$HOME/.bin" -type f -exec chmod +x {} \; 2>/dev/null || true
+        chmod +x "$HOME/.bin"/* 2>/dev/null || true
+        echo -e "${GREEN}Executáveis${NC} todos os arquivos em ~/.bin"
     fi
-    echo -e "${GREEN}Clonando${NC} https://github.com/amonetlol/fonts em ~/.fonts"
-    git clone https://github.com/amonetlol/fonts "$HOME/.fonts"
+}
+
+install_starship() {
+    echo_header "Starship prompt"
+    if [[ -f "$DOTFILES_DIR/config/starship.toml" ]]; then
+        link "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
+    fi
+}
+
+install_rofi_themes() {
+    echo_header "Temas do Rofi"
+    if [[ -d "$DOTFILES_DIR/local/share/rofi" ]]; then
+        link "$DOTFILES_DIR/local/share/rofi" "$HOME/.local/share/rofi"
+    fi
+}
+
+install_shell_configs() {
+    echo_header "Configurações do shell (.bashrc + .aliases)"
+    if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
+    BASHRC_DEST="$HOME/.bashrc"
+ 
+    # Faz backup do .bashrc existente (se houver)
+    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST" ]]; then
+        echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S)"
+        mv "$BASHRC_DEST" "$BASHRC_DEST.bak.$(date +%Y%m%d_%H%M%S)"
+    fi
+    # Cria o symlink para .bashrc
+    ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
+    echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
+    # ─── DETECÇÃO DA DISTRO PARA ESCOLHER O .aliases correto ───────────────
+    echo -e "${YELLOW}Detectando distro para carregar aliases corretos...${NC}"
+    if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
+        DISTRO="nixos"
+    elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
+        DISTRO="arch"
+    elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
+        DISTRO="debian"
+    elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
+        DISTRO="fedora"
+    else
+        DISTRO="unknown"
+    fi
+    echo -e "${GREEN}Distro detectada:${NC} $DISTRO"
+    # Nome do arquivo de aliases específico
+    ALIASES_FILE="$DOTFILES_DIR/.aliases-$DISTRO"
+    # Verifica se o arquivo específico existe
+    if [[ -f "$ALIASES_FILE" ]]; then
+        # Faz backup do .aliases atual (se existir)
+        if [[ -e "$HOME/.aliases" || -L "$HOME/.aliases" ]]; then
+            echo -e "${YELLOW}Backup${NC} ~/.aliases → ~/.aliases.bak.$(date +%Y%m%d_%H%M%S)"
+            mv "$HOME/.aliases" "$HOME/.aliases.bak.$(date +%Y%m%d_%H%M%S)" 2>/dev/null || true
+        fi
+        # Cria o symlink para o .aliases correto
+        ln -sf "$ALIASES_FILE" "$HOME/.aliases"
+        echo -e "${GREEN}Link${NC} ~/.aliases → $ALIASES_FILE"
+    else
+        echo -e "${RED}Aviso:${NC} Arquivo $ALIASES_FILE não encontrado no repositório."
+        echo -e " Usando apenas aliases comuns (se houver ~/.aliases)."
+    fi
+    echo -e "${YELLOW}Dica:${NC} Após instalar, rode 'source ~/.bashrc' para aplicar agora."
 fi
-echo -e "${GREEN}Atualizando cache de fontes...${NC}"
-fc-cache -vf
-# 8.Fixes
-echo -e "${GREEN}Walls...${NC}"
-link "$HOME/.config/qtile/walls" "$HOME/walls"
-# 9. Nvim
-echo -e "${GREEN}Nvim...${NC}"
-git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-nvim
-# 10. Hidden Applications
-link "$DOTFILES_DIR/local/share/applications" "$HOME/.local/share/applications"
+}
 
+install_sddm() {
+    echo_header "Configuração do SDDM"
+    if [[ -f "$DOTFILES_DIR/sddm.conf" ]]; then
+        SDDM_DEST="/etc/sddm.conf"
+        echo -e "${GREEN}Copiando${NC} sddm.conf para o sistema..."
+        sudo cp "$DOTFILES_DIR/sddm.conf" "$SDDM_DEST"
+        echo -e "${GREEN}feito${NC} $SDDM_DEST atualizado"
+        sudo systemctl enable sddm
+    fi
+}
 
+install_fonts() {
+    echo_header "Instalação de fontes"
+    if [[ -d "$HOME/.fonts" && -d "$HOME/.fonts/.git" ]]; then
+        echo -e "${YELLOW}Atualizando fontes existentes...${NC}"
+        git -C "$HOME/.fonts" pull
+    else
+        if [[ -d "$HOME/.fonts" ]]; then
+            mv "$HOME/.fonts" "$HOME/.fonts.bak.$(date +%Y%m%d_%H%M%S)"
+        fi
+        git clone https://github.com/amonetlol/fonts "$HOME/.fonts"
+    fi
+    fc-cache -vf
+    echo -e "${GREEN}Cache de fontes atualizado${NC}"
+}
 
-echo -e "${GREEN}"
-echo "Tudo pronto!"
-echo "Reinicie o Qtile (Super + Ctrl + R) ou faça logout/login para aplicar as mudanças."
-echo -e "${NC}"
+install_walls() {
+    echo_header "Fixes e ajustes pessoais"
+    link "$HOME/.config/qtile/walls" "$HOME/walls"
+}
+
+install_nvim() {
+    echo_header "AstroNvim (template limpo)"
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+    rm -rf ~/.config/nvim/.git
+    # nvim   ← comentado, pois abre editor e trava o script
+    echo "AstroNvim clonado. Abra o nvim para finalizar a instalação inicial."
+}
+
+install_hidden_applications() {
+    echo_header "Aplicações ocultas"
+    link "$DOTFILES_DIR/local/share/applications" "$HOME/.local/share/applications"
+}
+
+# =============================================
+#               EXECUÇÃO
+# =============================================
+
+echo -e "${GREEN}Instalando configs do amonetlol/qtile${NC}"
+
+install_configs
+install_bin
+install_starship
+install_rofi_themes
+install_shell_configs
+install_sddm
+install_fonts
+install_walls
+install_nvim
+install_hidden_applications
+
+# =============================================
+#                FINALIZAÇÃO
+# =============================================
+
+echo -e "\n${GREEN}Tudo pronto!${NC}"
+echo "Reinicie o Qtile (Super + Ctrl + R) ou faça logout/login."
+echo -e "Dica: para aplicar bashrc agora → ${YELLOW}source ~/.bashrc${NC}\n"
+
+# Para desativar alguma parte, é só comentar a linha abaixo:
+# install_sddm
+# install_nvim
+# install_fixes
+# etc...
