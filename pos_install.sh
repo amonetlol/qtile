@@ -168,6 +168,14 @@ install_hidden_applications() {
     link "$DOTFILES_DIR/local/share/applications" "$HOME/.local/share/applications"
 }
 
+update_xdg_users() {
+    echo_header "xdg-user-dirs Update)"
+    # Define o idioma desejado (ex: português do Brasil)
+    echo "pt_BR" > ~/.config/user-dirs.locale
+    # Atualiza tudo
+    xdg-user-dirs-update --force
+}
+
 # =============================================
 #               EXECUÇÃO
 # =============================================
