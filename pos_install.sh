@@ -79,49 +79,60 @@ install_rofi_themes() {
 
 install_shell_configs() {
     echo_header "Configurações do shell (.bashrc + .aliases)"
-    if [[ -f "$DOTFILES_DIR/.bashrc" ]]; then
-    BASHRC_DEST="$HOME/.bashrc"
- 
-    # Faz backup do .bashrc existente (se houver)
-    if [[ -e "$BASHRC_DEST" || -L "$BASHRC_DEST" ]]; then
-        echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.bak.$(date +%Y%m%d_%H%M%S)"
-        mv "$BASHRC_DEST" "$BASHRC_DEST.bak.$(date +%Y%m%d_%H%M%S)"
-    fi
-    # Cria o symlink para .bashrc
-    ln -sf "$DOTFILES_DIR/.bashrc" "$BASHRC_DEST"
-    echo -e "${GREEN}Link${NC} ~/.bashrc → $DOTFILES_DIR/.bashrc"
-    # ─── DETECÇÃO DA DISTRO PARA ESCOLHER O .aliases correto ───────────────
-    echo -e "${YELLOW}Detectando distro para carregar aliases corretos...${NC}"
-    if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
-        DISTRO="nixos"
-    elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
-        DISTRO="arch"
-    elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
-        DISTRO="debian"
-    elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
-        DISTRO="fedora"
-    else
-        DISTRO="unknown"
-    fi
-    echo -e "${GREEN}Distro detectada:${NC} $DISTRO"
-    # Nome do arquivo de aliases específico
-    ALIASES_FILE="$DOTFILES_DIR/.aliases-$DISTRO"
-    # Verifica se o arquivo específico existe
-    if [[ -f "$ALIASES_FILE" ]]; then
-        # Faz backup do .aliases atual (se existir)
-        if [[ -e "$HOME/.aliases" || -L "$HOME/.aliases" ]]; then
-            echo -e "${YELLOW}Backup${NC} ~/.aliases → ~/.aliases.bak.$(date +%Y%m%d_%H%M%S)"
-            mv "$HOME/.aliases" "$HOME/.aliases.bak.$(date +%Y%m%d_%H%M%S)" 2>/dev/null || true
-        fi
-        # Cria o symlink para o .aliases correto
-        ln -sf "$ALIASES_FILE" "$HOME/.aliases"
-        echo -e "${GREEN}Link${NC} ~/.aliases → $ALIASES_FILE"
-    else
-        echo -e "${RED}Aviso:${NC} Arquivo $ALIASES_FILE não encontrado no repositório."
-        echo -e " Usando apenas aliases comuns (se houver ~/.aliases)."
-    fi
-    echo -e "${YELLOW}Dica:${NC} Após instalar, rode 'source ~/.bashrc' para aplicar agora."
-fi
+
+    local bashrc_src="$DOTFILES_DIR/.bashrc"
+    local bashrc_dest="$HOME/.bashrc"
+
+    # Se o .bashrc fonte não existe, não faz nada
+    if [[ ! -f "$bashrc_src" ]]; then
+        echo -e "${YELLOW}Aviso:${NC} $bashrc_src não encontrado. Pulando configuração do bashrc."
+        return
+    fi
+
+    # Backup simples do .bashrc existente (se houver)
+    if [[ -e "$bashrc_dest" || -L "$bashrc_dest" ]]; then
+        echo -e "${YELLOW}Backup${NC} ~/.bashrc → ~/.bashrc.old"
+        mv "$bashrc_dest" "$bashrc_dest.old" || true
+    fi
+
+    # Cria symlink do .bashrc
+    ln -sf "$bashrc_src" "$bashrc_dest"
+    echo -e "${GREEN}Link${NC} ~/.bashrc → $bashrc_src"
+
+    # Detecção da distro
+    echo -e "${YELLOW}Detectando distro...${NC}"
+    local distro="unknown"
+
+    if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
+        distro="nixos"
+    elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
+        distro="arch"
+    elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
+        distro="debian"
+    elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
+        distro="fedora"
+    fi
+
+    echo -e "${GREEN}Distro detectada:${NC} $distro"
+
+    # Arquivo de aliases específico
+    local aliases_file="$DOTFILES_DIR/.aliases-$distro"
+
+    if [[ -f "$aliases_file" ]]; then
+        # Backup simples do .aliases existente (se houver)
+        if [[ -e "$HOME/.aliases" || -L "$HOME/.aliases" ]]; then
+            echo -e "${YELLOW}Backup${NC} ~/.aliases → ~/.aliases.old"
+            mv "$HOME/.aliases" "$HOME/.aliases.old" 2>/dev/null || true
+        fi
+
+        # Cria symlink do .aliases
+        ln -sf "$aliases_file" "$HOME/.aliases"
+        echo -e "${GREEN}Link${NC} ~/.aliases → $aliases_file"
+    else
+        echo -e "${RED}Aviso:${NC} Arquivo $aliases_file não encontrado."
+    fi
+
+    echo -e "${YELLOW}Dica:${NC} Rode 'source ~/.bashrc' para aplicar as mudanças agora."
 }
 
 install_sddm() {
