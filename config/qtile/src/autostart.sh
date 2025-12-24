@@ -14,5 +14,6 @@ fi
 # fi
 
 # ===== WALLPAPER ALEATÓRIO COM FEH =====
-setfeh.sh &
+#setfeh.sh &
+sh ~/.fehbg
 
