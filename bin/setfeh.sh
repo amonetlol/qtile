@@ -28,7 +28,8 @@ fi
 
 # 3. Define o wallpaper aleatório com feh
 echo "Aplicando wallpaper aleatório com feh..."
-feh --randomize --bg-fill ~/walls/wall1.jpg
+#feh --randomize --bg-fill ~/walls/wall1.jpg
+sh ~/.fehbg
 
 # 4. (Opcional) Executa o último .fehbg salvo, caso queira restaurar o anterior em vez de randomizar
 # Comente a linha acima e descomente a de baixo se preferir restaurar o último wallpaper usado
