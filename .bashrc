@@ -1,25 +1,27 @@
-alias ft="fastfetch --logo small"
-alias al='nvim ~/.bashrc'
-alias .r='source ~/.bashrc'
-alias nv='nvim'
-alias v='nvim'
-alias qd='cd ~/.config/qtile && ll'
-alias lg="ls | grep"
-alias ls='eza -lah --color=always --group-directories-first --icons'
-alias ll='eza -lah --color=always --group-directories-first --icons'
-alias df='duf -hide special'
-alias duf='duf -hide special'
-alias hg='history | grep'
-alias ag='alias | grep'
-alias cp='cp -i'
-alias mv='mv -i'
-alias grep='grep -i'
-alias mkdir='mkdir -p'
-alias ping='ping -c 10'
-alias exe='chmod +x'
-alias xprop='xprop WM_CLASS | grep WM_CLASS'
-alias win='rofi -show window'
-alias fix='~/.bin/fix_resolution'
+ft() {
+    local config_dir="/home/pio/.config/fastfetch"
+    local configs=(
+        "$config_dir/Chris.jsonc"
+        "$config_dir/config.jsonc"
+        "$config_dir/small_config.jsonc"
+    )
+
+    # Verifica se pelo menos uma config existe (opcional, mas evita erro)
+    local valid_configs=()
+    for cfg in "${configs[@]}"; do
+        [[ -f "$cfg" ]] && valid_configs+=("$cfg")
+    done
+
+    if [[ ${#valid_configs[@]} -eq 0 ]]; then
+        echo "Erro: Nenhuma das configs encontradas em $config_dir" >&2
+        return 1
+    fi
+
+    # Escolhe uma config aleatória entre as válidas
+    local chosen="${valid_configs[$RANDOM % ${#valid_configs[@]}]}"
+
+    fastfetch --config "$chosen"
+}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DETECÇÃO DA DISTRO + CARREGAMENTO DE ALIASES
