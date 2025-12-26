@@ -1,8 +1,7 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-    "type": "builtin",
-    "source": "arch_small", // Logo small oficial do Arch (o triângulo com o A)
+    "type": "small",     
     "padding": {
       "top": 1, // 1 linha do logo + 1 linha em branco extra = pula uma linha antes do texto
       "left": 2,
@@ -49,4 +48,5 @@
       "key": "",
     },
   ],
+
 }
