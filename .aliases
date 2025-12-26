@@ -19,7 +19,8 @@ alias logs="systemctl --failed; echo; journalctl -p 3 -b"
 alias logs2='journalctl -p err --since "1 hour ago"'
 alias gfont='fc-list -f "%{family}\n" | grep -i '
 alias gfont2='kitty +list-fonts | grep'
-#alias al='nvim ~/.bashrc ~/.aliases'
+alias grep='grep -i'
+alias al='nvim ~/.bashrc ~/.aliases'
 alias .r='source ~/.bashrc'
 alias man='tldr'
 alias nv='nvim'
@@ -33,9 +34,17 @@ alias j-edit='nvim ~/.local/share/autojump/autojump.txt'
 alias inxi='inxi -Fxz'
 alias fv='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim'
 alias nf='nerdfetch'
+alias sf='screenfetch'
 alias tx='gnome-text-editor'
 #alias ft='fastfetch --logo small'
-alias ft2='fastfetch --logo small -c ~/.config/fastfetch/Chris.jsonc'
+#alias ft2='fastfetch --logo small -c ~/.config/fastfetch/Chris.jsonc'
+alias lg="ls | grep"
 alias ls='eza -lah --color=always --group-directories-first --icons'
 alias ll='eza -lah --color=always --group-directories-first --icons'
 # ... todos os outros comuns ...
+
+# Qtile Stuffs
+alias xprop='xprop WM_CLASS | grep WM_CLASS'
+alias win='rofi -show window'
+alias fix='~/.bin/fix_resolution'
+alias qd='cd ~/.config/qtile && ll'
