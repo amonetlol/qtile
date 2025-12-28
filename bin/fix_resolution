@@ -2,8 +2,6 @@
 # ~/.bin/fix_resolution  (ou onde você preferir colocar)
 set -euo pipefail
 
-sh ~/.fehbg
-
 CURRENT=$(xrandr --query | grep ' connected primary' | grep -oP '\d+x\d+' | head -1)
 
 if [[ "$CURRENT" == "1920x1080" ]]; then
@@ -17,5 +15,7 @@ else
     echo "Aplicando 1920x1080 como padrão..."
     xrandr -s 1920x1080
 fi
+
+sh ~/.fehbg
 
 echo "Resolução atual: $(xrandr --query | grep ' connected primary' | awk '{print $4}')"
