@@ -20,9 +20,11 @@ sys.path.append(expanduser('~/.config/qtile/src'))
 mod         = "mod4"                       # Sets mod key to SUPER/WINDOWS
 alt         = "mod1"                       # Sets the alt key to left-alt key
 myTerm      = "kitty"                    # My terminal of choice
+myTerm2     = "alacritty --config-file /home/pio/.config/iSettings/alacritty/alacritty.toml"
 myBrowser   = "firefox"                   # My browser of choice
 myEditor    = "kitty -e nvim"            # My editor of choice
-myLauncher  = "rofi -show drun"            # My launcher of choice
+#myLauncher  = "rofi -show drun"            # My launcher of choice
+myLauncher  = "rofi -show drun -config ~/.config/iSettings/themes/nordico/rofi/launcher.rasi"
 myExplorer  = "thunar"
 
 
@@ -68,7 +70,8 @@ def maximize_by_switching_layout(qtile):
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Terminal"),
+    #Key([mod, "shift"], "Return", lazy.spawn("alacritty"), desc="Terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn(myTerm2), desc="Terminal"),
     Key([mod], "d", lazy.spawn(myLauncher), desc='Run Launcher'),
     Key([mod], "w", lazy.spawn(myBrowser), desc='Web browser'),
     Key([mod], "e", lazy.spawn(myExplorer), desc='Nautilus'),
@@ -77,7 +80,8 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([], "Print", lazy.spawn("/home/pio/.bin/maimshot"), desc="Screenshot menu"),
-    Key([mod, alt], "x", lazy.spawn("/home/pio/.bin/pmenu"), desc="Logout menu"),
+    #Key([mod, alt], "x", lazy.spawn("/home/pio/.bin/pmenu"), desc="Logout menu"),
+    Key([mod, alt], "x", lazy.spawn("/home/pio/.config/iSettings/rofi/powermenu.sh"), desc="Logout menu"),
     
     # Window management
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -505,8 +509,13 @@ def init_widgets_screen1():
     return widgets_screen1
 
 
+# QtileBAR
+# def init_screens():
+#     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=44))]
+#
+# Polybar
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=44))]
+    return [Screen(top=bar.Gap(2),),]
 
 screens = init_screens()
 
