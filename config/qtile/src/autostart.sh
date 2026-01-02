@@ -17,3 +17,6 @@ fi
 #setfeh.sh &
 sh ~/.fehbg
 
+# === Polybar ===
+. ~/.config/iSettings/themes/polybar.sh
+
