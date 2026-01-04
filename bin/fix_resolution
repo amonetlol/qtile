@@ -17,5 +17,6 @@ else
 fi
 
 sh ~/.fehbg
+polybar-msg cmd restart
 
 echo "Resolução atual: $(xrandr --query | grep ' connected primary' | awk '{print $4}')"
