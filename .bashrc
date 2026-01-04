@@ -23,6 +23,47 @@ ft() {
     fastfetch --config "$chosen"
 }
 
+# USO:
+# gc https://github.com/amonetlol/polybar
+# → Clona e entra automaticamente na pasta polybar
+#
+# gc https://github.com/dylanaraps/neofetch.git meu-neofetch
+# → Clona para a pasta "meu-neofetch" e entra nela
+
+
+gc() {
+    if [ -z "$1" ]; then
+        echo "Uso: gc <url-do-repositório> [pasta-opcional]"
+        return 1
+    fi
+
+    # Clona o repositório
+    git clone "$@"
+
+    # Verifica se o clone foi bem sucedido
+    if [ $? -ne 0 ]; then
+        echo "Erro ao clonar o repositório."
+        return 1
+    fi
+
+    # Extrai o nome da pasta (último argumento ou deduz do URL)
+    local repo_dir
+    if [ -n "$2" ]; then
+        repo_dir="$2"  # Se especificaste uma pasta personalizada
+    else
+        repo_dir=$(basename "$1" .git)  # Remove .git do final do URL
+    fi
+
+    # Entra na pasta
+    if [ -d "$repo_dir" ]; then
+        cd "$repo_dir" || return 1
+        echo "Entraste na pasta: $repo_dir"
+    else
+        echo "Aviso: Pasta $repo_dir não encontrada após clone."
+    fi
+}
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # DETECÇÃO DA DISTRO + CARREGAMENTO DE ALIASES
 # ─────────────────────────────────────────────────────────────────────────────
