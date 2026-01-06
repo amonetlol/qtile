@@ -48,7 +48,7 @@ install_bin() {
     echo_header "Binários (~/.bin)"
     [[ -d "$DOTFILES_DIR/bin" ]] || return
     link "$DOTFILES_DIR/bin" "$HOME/.bin"
-    find "$HOME/.bin" -type f -exec chmod +x {} + 2>/dev/null || true
+    chmod +x "$HOME/.bin"/* 
 }
 
 install_starship() {
