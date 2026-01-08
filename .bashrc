@@ -79,6 +79,8 @@ elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release
     DISTRO="fedora"
 elif grep -qiE 'openSUSE' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
     DISTRO="openSUSE"
+elif grep -qiE 'Solus' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
+    DISTRO="Solus"
 else
     DISTRO="unknown"
 fi
@@ -103,6 +105,9 @@ case $DISTRO in
         ;;
     openSUSE)
         [ -f ~/.aliases-opensuse ] && . ~/.aliases-opensuse
+        ;;
+    Solus)
+        [ -f ~/.aliases-solus ] && . ~/.aliases-solus
         ;;
     *)
         echo "[AVISO] Distro não reconhecida: $DISTRO"
