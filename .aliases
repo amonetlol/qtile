@@ -61,3 +61,8 @@ alias qr='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1'
 alias qpb='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1 && polybar-msg cmd restart >/dev/null 2>&1'
 alias wall='feh --no-fehbg --bg-fill'
 alias wall2='feh --bg-fill'
+
+# Zoxite (autojump)
+alias j='z'
+alias ji='zi'  # interativo com fzf
+
