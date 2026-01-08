@@ -128,4 +128,5 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 export PATH="$HOME/.bin:$PATH"
+eval "$(zoxide init bash)"
 eval "$(starship init bash)"
