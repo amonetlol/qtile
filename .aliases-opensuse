@@ -11,7 +11,7 @@ alias yin='sudo zypper --non-interactive install'
 alias yse='zypper search'                  # ou 'zypper se -s' pra mais detalhes
 
 # Listar pacotes instalados e grep (equivalente ao yay -Qq | grep)
-alias ysel='zypper packages --installed | grep'
+alias ysel='rpm -qa | grep'
 
 # Remover pacote + deps não usadas + limpar cache do pacote
 alias yre='sudo zypper --non-interactive remove --clean-deps'
