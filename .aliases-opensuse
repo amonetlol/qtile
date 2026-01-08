@@ -27,4 +27,5 @@ alias cls='sudo zypper clean --all'
 alias rpac='sudo zypper --non-interactive refresh'
 
 # Remover pacotes órfãos/unneeded (os que foram auto-instalados e não são mais necessários)
-alias orf='sudo zypper packages --unneeded | awk -F"|" "/^i /{print \$3}" | xargs -r sudo zypper --non-interactive remove --clean-deps'
+alias orf='sudo zypper packages --unneeded | awk -F"|" "/^i /{print \$3}" | xargs -r sudo zypper remove --clean-deps'
+#alias orf='sudo zypper packages --unneeded | awk -F"|" "/^i /{print \$3}" | xargs -r sudo zypper --non-interactive remove --clean-deps'
