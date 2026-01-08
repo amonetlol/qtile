@@ -14,6 +14,7 @@ alias yse='zypper search'                  # ou 'zypper se -s' pra mais detalhes
 alias ysel='rpm -qa | grep'
 
 # Remover pacote + deps não usadas + limpar cache do pacote
+alias yre='sudo zypper remove --clean-deps'
 alias yre='sudo zypper --non-interactive remove --clean-deps'
 
 # Info detalhada do pacote
