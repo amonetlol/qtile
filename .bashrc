@@ -73,10 +73,12 @@ if [[ -f /etc/nixos/configuration.nix || -d /etc/nixos ]]; then
     DISTRO="nixos"
 elif [[ -f /etc/arch-release || -f /etc/artix-release ]]; then
     DISTRO="arch"
-elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian)' /etc/os-release 2>/dev/null; then
+elif [[ -f /etc/debian_version ]] || grep -qiE '(ubuntu|debian|pop|mint)' /etc/os-release 2>/dev/null; then
     DISTRO="debian"
 elif grep -qiE 'fedora' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
     DISTRO="fedora"
+elif grep -qiE 'openSUSE' /etc/os-release 2>/dev/null || [[ -f /etc/fedora-release ]]; then
+    DISTRO="openSUSE"
 else
     DISTRO="unknown"
 fi
@@ -98,6 +100,9 @@ case $DISTRO in
         ;;
     fedora)
         [ -f ~/.aliases-fedora ] && . ~/.aliases-fedora
+        ;;
+    openSUSE)
+        [ -f ~/.aliases-opensuse ] && . ~/.aliases-opensuse
         ;;
     *)
         echo "[AVISO] Distro não reconhecida: $DISTRO"
