@@ -59,6 +59,7 @@ alias qd='cd ~/.config/qtile && ll'
 alias pb='polybar-msg cmd restart >/dev/null 2>&1'
 alias qr='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1'
 alias qpb='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1 && polybar-msg cmd restart >/dev/null 2>&1'
+alias qlog='code ~/.local/share/qtile/qtile.log'
 alias wall='feh --no-fehbg --bg-fill'
 alias wall2='feh --bg-fill'
 
