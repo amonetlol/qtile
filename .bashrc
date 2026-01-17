@@ -4,6 +4,7 @@ ft() {
         "$config_dir/Chris.jsonc"
         "$config_dir/config.jsonc"
         "$config_dir/small_config.jsonc"
+        "$config_dir/cybrland.jsonc"
     )
 
     # Verifica se pelo menos uma config existe (opcional, mas evita erro)
