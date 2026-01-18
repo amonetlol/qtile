@@ -86,6 +86,26 @@ install_nvim() {
     [[ -d "$nvim_dir" ]] && { echo "AstroNvim já existe, pulando."; return; }
     git clone --depth 1 https://github.com/AstroNvim/template "$nvim_dir"
     rm -rf "$nvim_dir/.git"
+
+    # Mappings personalizados
+    mkdir -p ~/.config/nvim/lua/user
+    cat > ~/.config/nvim/lua/user/mappings.lua << 'EOF'
+    return {
+      -- Modo Normal
+      n = {
+        ["<leader>w"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
+        ["<leader>W"] = { "<cmd>wqa<cr>", desc = "Salvar e sair todos" },
+      },
+      -- Modo Insert
+      i = {
+        ["<C-s>"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
+      },
+      -- Modo Visual
+      v = {
+        ["<leader>w"] = { ":w<cr>", desc = "Salvar buffer" },
+      },
+    }
+    EOF
     echo -e "${YELLOW}AstroNvim clonado.${NC} Abra 'nvim' para finalizar a instalação inicial."
 }
 
