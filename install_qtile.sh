@@ -93,16 +93,18 @@ install_nvim() {
     return {
       -- Modo Normal
       n = {
-        ["<leader>s"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
-        ["<leader>q"] = { "<cmd>wqa<cr>", desc = "Salvar e sair todos" },
+        ["<C-s>"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
+        ["<C-q>"] = { "<cmd>wqa<cr>", desc = "Salvar e sair todos" },
       },
       -- Modo Insert
       i = {
         ["<C-s>"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
+        ["<C-q>"] = { "<cmd>wqa<cr>", desc = "Salvar e sair todos" },
       },
       -- Modo Visual
       v = {
-        ["<leader>w"] = { ":w<cr>", desc = "Salvar buffer" },
+        ["<C-s>"] = { "<cmd>w<cr>", desc = "Salvar buffer" },
+        ["<C-q>"] = { "<cmd>wqa<cr>", desc = "Salvar e sair todos" },
       },
     }
     EOF
