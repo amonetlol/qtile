@@ -90,6 +90,15 @@ install_nvim() {
     # Mappings personalizados
     mkdir -p ~/.config/nvim/lua/user
     cat > ~/.config/nvim/lua/user/mappings.lua << 'EOF'
+    -- Primeiro: deleta explicitamente qualquer mapping existente para <C-s> e <C-q>
+    -- Isso roda ANTES do AstroNvim aplicar defaults em alguns casos
+    local function clear_conflicting_maps()
+      for _, mode in ipairs({"n", "i", "v"}) do
+        pcall(vim.keymap.del, mode, "<C-s>")
+        pcall(vim.keymap.del, mode, "<C-q>")
+      end
+    end
+    
     return {
       -- Modo Normal
       n = {
