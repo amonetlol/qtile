@@ -5,31 +5,4 @@ https://github.com/kosa12/hyprKCS
 https://gitlab.com/BA_usr/dotfiles-for-hyperland
 
 
-#!/usr/bin/env bash
-
-# Diretório das wallpapers
-dir="${HOME}/walls"
-
-# Tema do Rofi (use caminho absoluto para evitar problemas)
-rofi_cmd="rofi -theme $HOME/.config/rofi/wallpaper-preview.rasi"
-
-# Lista as imagens (melhor usar find para extensões específicas)
-mapfile -t images < <(find "$dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -printf '%f\n' | sort)
-
-if [[ ${#images[@]} -eq 0 ]]; then
-    notify-send "Nenhuma imagem encontrada em $dir"
-    exit 1
-fi
-
-# Mostra o menu com preview (filebrowser é melhor para thumbnails, mas como você usa dmenu + nomes...)
-# Alternativa: usar \0icon\x1f para thumbnails (mais abaixo explico)
-selected=$(printf '%s\n' "${images[@]}" | $rofi_cmd -dmenu -p "Select wallpaper image" -i)
-
-# Se nada selecionado, sai
-[[ -z $selected ]] && exit 0
-
-# Mata swaybg se estiver rodando (opcional)
-pkill swaybg 2>/dev/null
-
-# Aplica o wallpaper
-swaybg -i "$dir/$selected" -m fill &
+https://github.com/develcooking/hyprland-dotfiles
