@@ -65,7 +65,7 @@ alias wall='feh --no-fehbg --bg-fill'
 alias wall2='feh --bg-fill'
 
 # Hyprland Stuffs
-alias hr='hyprctl reload"
+alias hr='hyprctl reload'
 alias wb='pkill waybar && waybar &'
 alias hd='cd ~/.config/hypr && ll'
 
