@@ -1,38 +1,82 @@
+//   _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+//  |   __|  _  |   __|_   _|   __|   __|_   _|     |  |  |
+//  |   __|     |__   | | | |   __|   __| | | |   --|     |
+//  |__|  |__|__|_____| |_| |__|  |_____| |_| |_____|__|__|  NYARCH
+//
+//  by Bina
+
+                                                       
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "auto",               // ou "kitty", "kitty-direct", "sixel", "chafa" dependendo do terminal
-        "source": "~/.config/fastfetch/homer.jpg",
-        "height": 18,                 // ajuste até ficar bom (ou use width)
-        "padding": { "right": 2 }     // espaço entre imagem e texto
+	    "source": "~/.config/fastfetch/homer.png",
+	    "type": "kitty",
+	    "height": 14,
+	    "padding": {
+		    "top": 1
+	    }
     },
     "display": {
-        "separator": "  ",            // ou " → ", " : ", etc.
-        "color": "yellow"
+        "separator": " "
     },
     "modules": [
-        "title",
-        "separator",
+        "break",
+        "break",
+        "break",
+        {
+            "type": "title",
+            "keyWidth": 10
+        },
+        {
+            "type": "custom",
+            "format": "~~~~~~~~~~~~~~~~~~~~~~~~~~",
+        },
         {
             "type": "os",
-            "key": " ▲  OS"
+            "key": "~ ",
+            "keyColor": "34",  // = color4
         },
         {
             "type": "kernel",
-            "key": " ▲  Kernel"
+            "key": "~ ",
+            "keyColor": "34",
         },
         {
             "type": "packages",
-            "key": " ▲  Packages"
-        },
-        {
-            "type": "wm",
-            "key": " ▲  WM / DE"
+            "format": "{} (pacman)",
+            "key": "~ ",
+            "keyColor": "34",  
         },
         {
             "type": "shell",
-            "key": " ▲  Shell"
-        }
-        // adicione mais se quiser: cpu, memory, gpu, etc.
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        {
+            "type": "terminal",
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        {
+            "type": "wm",
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        {
+            "type": "uptime",
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        {
+            "type": "media",
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        {
+            "type": "player",
+            "key": "~ ",
+            "keyColor": "34", 
+        },
+        "break",
     ]
 }
