@@ -69,6 +69,9 @@ alias hr='hyprctl reload'
 alias wb='pkill waybar && waybar &'
 alias hd='cd ~/.config/hypr && ll'
 
+alias way='~/.src/launch.sh'
+alias sudo2='faillock --reset'
+
 # Zoxite (autojump)
 alias j='z'
 alias ji='zi'  # interativo com fzf
