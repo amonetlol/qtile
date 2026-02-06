@@ -39,6 +39,7 @@ alias ls='eza -lah --color=always --group-directories-first --icons'
 alias ll='eza -lah --color=always --group-directories-first --icons'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias failk='faillock --reset'
+alias sudo2='faillock --reset'
 
 # ==== Fetchs ===
 alias xft='sexyFetch.sh'
@@ -61,16 +62,22 @@ alias pb='polybar-msg cmd restart >/dev/null 2>&1'
 alias qr='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1'
 alias qpb='qtile cmd-obj -o cmd -f restart >/dev/null 2>&1 && polybar-msg cmd restart >/dev/null 2>&1'
 alias qlog='code ~/.local/share/qtile/qtile.log'
-alias wall='feh --no-fehbg --bg-fill'
-alias wall2='feh --bg-fill'
+alias fwall='feh --no-fehbg --bg-fill'
+alias fwall2='feh --bg-fill'
 
 # Hyprland Stuffs
 alias hr='hyprctl reload'
 alias wb='pkill waybar && waybar &'
 alias hd='cd ~/.config/hypr && ll'
-
+alias swall='swww img ~/Imagens/wallpapers/045.jpg'
+alias swall2='swww img'
 alias way='~/.src/launch.sh'
-alias sudo2='faillock --reset'
+
+# OpenBox
+alias od='cd ~/.config/openbox && ll'
+alias or='openbox --reconfigure'
+
+
 
 # Zoxite (autojump)
 alias j='z'
