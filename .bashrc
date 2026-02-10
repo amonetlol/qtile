@@ -140,7 +140,7 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 shopt -s histappend
 PROMPT_COMMAND='history -a'
 
-export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
