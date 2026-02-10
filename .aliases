@@ -72,6 +72,7 @@ alias hd='cd ~/.config/hypr && ll'
 alias swall='swww img ~/Imagens/wallpapers/045.jpg'
 alias swall2='swww img'
 alias way='~/.src/launch.sh'
+alias hprop='hyprctl clients | grep "class:"'
 
 # OpenBox
 alias od='cd ~/.config/openbox && ll'
