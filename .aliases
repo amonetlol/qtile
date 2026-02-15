@@ -41,6 +41,11 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias failk='faillock --reset'
 alias sudo2='faillock --reset'
 
+# yt-dlp
+alias yt='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]/best[ext=mp4]/best" --merge-output-format mp4'
+alias play='celluloid'
+alias cut='~/.bin/cut.sh'
+
 # ==== Fetchs ===
 alias xft='sexyFetch.sh'
 alias ftm='fastfetch --config ~/.config/fastfetch/small_config.jsonc'
@@ -78,9 +83,9 @@ alias hprop='hyprctl clients | grep "class:"'
 alias od='cd ~/.config/openbox && ll'
 alias or='openbox --reconfigure'
 
-
-
 # Zoxite (autojump)
 alias j='z'
 alias ji='zi'  # interativo com fzf
+
+
 
