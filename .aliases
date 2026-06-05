@@ -20,7 +20,6 @@ alias logs2='journalctl -p err --since "1 hour ago"'
 alias gfont='fc-list -f "%{family}\n" | grep -i '
 alias gfont2='kitty +list-fonts | grep'
 alias grep='grep -i'
-alias al='nvim ~/.bashrc ~/.aliases'
 alias .r='source ~/.bashrc'
 alias man='tldr'
 alias nv='nvim'
@@ -30,7 +29,6 @@ alias duf='duf --hide special'
 alias ff='sh ~/Scripts/fsearch'
 alias hg='history | grep'
 alias ag='alias | grep'
-alias j-edit='nvim ~/.local/share/autojump/autojump.txt'
 alias inxi='inxi -Fxz'
 alias fv='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim'
 alias tx='gnome-text-editor'
@@ -39,12 +37,14 @@ alias ls='eza -lah --color=always --group-directories-first --icons'
 alias ll='eza -lah --color=always --group-directories-first --icons'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias failk='faillock --reset'
-alias sudo2='faillock --reset'
+alias ps='procs'
 
-# yt-dlp
-alias yt='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]/best[ext=mp4]/best" --merge-output-format mp4'
-alias play='celluloid'
-alias cut='~/.bin/cut.sh'
+# ==== NVIM ====
+alias al='nvim ~/.bashrc ~/.aliases'
+alias aln='cd ~/.config/nvim/ && nvim init.lua'
+alias alw='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && nvim config.jsonc style.css'
+alias j-edit='nvim ~/.local/share/autojump/autojump.txt'
+
 
 # ==== Fetchs ===
 alias xft='sexyFetch.sh'
@@ -74,18 +74,22 @@ alias fwall2='feh --bg-fill'
 alias hr='hyprctl reload'
 alias wb='pkill waybar && waybar &'
 alias hd='cd ~/.config/hypr && ll'
-alias swall='swww img ~/Imagens/wallpapers/045.jpg'
-alias swall2='swww img'
-alias way='~/.src/launch.sh'
+alias swall='awww img ~/Imagens/wallpapers/045.jpg'
+alias swall2='awww img'
 alias hprop='hyprctl clients | grep "class:"'
+alias ewb='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && nvim config.jsonc style.css'
+alias hwb='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && ll'
+alias hro='cd ~/.config/hypr/hypr-rox-vmware/.config/rofi && ll'
 
-# OpenBox
-alias od='cd ~/.config/openbox && ll'
+alias od='cd  ~/.config/openbox/ && ll'
 alias or='openbox --reconfigure'
 
 # Zoxite (autojump)
 alias j='z'
 alias ji='zi'  # interativo com fzf
 
-
+# yt-dlp
+alias yt='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]/best[ext=mp4]/best" --merge-output-format mp4'
+alias play='celluloid'
+alias cut='~/.bin/cut.sh'
 
