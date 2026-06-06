@@ -1,52 +1,91 @@
 # ~/.aliases
 # Apenas aliases comuns (sem condicional)
 
+# ============================================================
+# ARQUIVOS / DIRETÓRIOS
+# ============================================================
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-alias ping='ping -c 10'
-alias tping='ping -c 4 google.com'
 alias exe='chmod +x'
-alias off='systemctl poweroff'
-alias reb='systemctl reboot'
-alias weather="curl -s 'wttr.in/Ubatuba?0&lang=pt-br'"
-alias tempo='curl -s "https://wttr.in/Ubatuba?format=%t\n" | head -n 3'
 alias cat='bat'
-alias kill='kill -9'
-alias killall='killall -9'
-alias free-mem="sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
-alias logs="systemctl --failed; echo; journalctl -p 3 -b"
-alias logs2='journalctl -p err --since "1 hour ago"'
-alias gfont='fc-list -f "%{family}\n" | grep -i '
-alias gfont2='kitty +list-fonts | grep'
-alias grep='grep -i'
-alias .r='source ~/.bashrc'
-alias man='tldr'
-alias nv='nvim'
-alias v='nvim'
-alias df='duf --hide special'
-alias duf='duf --hide special'
-alias ff='sh ~/Scripts/fsearch'
-alias hg='history | grep'
-alias ag='alias | grep'
-alias inxi='inxi -Fxz'
-alias fv='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim'
-alias tx='gnome-text-editor'
-alias lg="ls | grep"
 alias ls='eza -lah --color=always --group-directories-first --icons'
 alias ll='eza -lah --color=always --group-directories-first --icons'
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias failk='faillock --reset'
-alias ps='procs'
+alias df='duf --hide special'
+alias duf='duf --hide special'
 
-# ==== NVIM ====
+
+# ============================================================
+# BUSCA / FILTROS / HISTÓRICO
+# ============================================================
+alias grep='grep -i'
+alias hg='history | grep'
+alias ag='alias | grep'
+alias lg="ls | grep"
+alias gfont='fc-list -f "%{family}\n" | grep -i '
+alias gfont2='kitty +list-fonts | grep'
+
+
+# ============================================================
+# EDITORES / CONFIGURAÇÕES
+# ============================================================
+alias nv='nvim'
+alias v='nvim'
+alias tx='gnome-text-editor'
+alias .r='source ~/.bashrc'
+alias man='tldr'
+
 alias al='nvim ~/.bashrc ~/.aliases'
 alias aln='cd ~/.config/nvim/ && nvim init.lua'
 alias alw='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && nvim config.jsonc style.css'
 alias j-edit='nvim ~/.local/share/autojump/autojump.txt'
 
 
-# ==== Fetchs ===
+# ============================================================
+# SISTEMA / ENERGIA / BOOT
+# ============================================================
+alias off='systemctl poweroff'
+alias reb='systemctl reboot'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias failk='faillock --reset'
+
+
+# ============================================================
+# PROCESSOS / MEMÓRIA / MONITORAMENTO
+# ============================================================
+alias ps='procs'
+alias kill='kill -9'
+alias killall='killall -9'
+alias free-mem="sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
+alias inxi='inxi -Fxz'
+
+
+# ============================================================
+# LOGS / DIAGNÓSTICO
+# ============================================================
+alias logs="systemctl --failed; echo; journalctl -p 3 -b"
+alias logs2='journalctl -p err --since "1 hour ago"'
+
+
+# ============================================================
+# REDE / INTERNET / CLIMA
+# ============================================================
+alias ping='ping -c 10'
+alias tping='ping -c 4 google.com'
+alias weather="curl -s 'wttr.in/Ubatuba?0&lang=pt-br'"
+alias tempo='curl -s "https://wttr.in/Ubatuba?format=%t\n" | head -n 3'
+
+
+# ============================================================
+# FZF / BUSCA INTERATIVA
+# ============================================================
+alias ff='sh ~/Scripts/fsearch'
+alias fv='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs -r nvim'
+
+
+# ============================================================
+# FETCH / INFORMAÇÕES VISUAIS DO SISTEMA
+# ============================================================
 alias xft='sexyFetch.sh'
 alias ftm='fastfetch --config ~/.config/fastfetch/small_config.jsonc'
 alias ft2='fastfetch --logo small -c ~/.config/fastfetch/Chris.jsonc'
@@ -56,9 +95,17 @@ alias nf2='nerdfetch'
 alias sf='screenfetch'
 alias uf='ufetch'
 
-# ... todos os outros comuns ...
 
-# Qtile Stuffs
+# ============================================================
+# VNC / WAYVNC
+# ============================================================
+alias svnc='systemctl --user status wayvnc'
+alias rvnc='systemctl --user start wayvnc'
+
+
+# ============================================================
+# QTILE
+# ============================================================
 alias xprop='xprop WM_CLASS | grep WM_CLASS'
 alias win='rofi -show window'
 alias fix='~/.bin/fix_resolution'
@@ -70,7 +117,10 @@ alias qlog='code ~/.local/share/qtile/qtile.log'
 alias fwall='feh --no-fehbg --bg-fill'
 alias fwall2='feh --bg-fill'
 
-# Hyprland Stuffs
+
+# ============================================================
+# HYPRLAND
+# ============================================================
 alias hr='hyprctl reload'
 alias wb='pkill waybar && waybar &'
 alias hd='cd ~/.config/hypr && ll'
@@ -81,15 +131,24 @@ alias ewb='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && nvim config.json
 alias hwb='cd ~/.config/hypr/hypr-rox-vmware/.config/waybar/ && ll'
 alias hro='cd ~/.config/hypr/hypr-rox-vmware/.config/rofi && ll'
 
-alias od='cd  ~/.config/openbox/ && ll'
+
+# ============================================================
+# OPENBOX
+# ============================================================
+alias od='cd ~/.config/openbox/ && ll'
 alias or='openbox --reconfigure'
 
-# Zoxite (autojump)
+
+# ============================================================
+# ZOXIDE / AUTOJUMP
+# ============================================================
 alias j='z'
 alias ji='zi'  # interativo com fzf
 
-# yt-dlp
+
+# ============================================================
+# YT-DLP / MÍDIA
+# ============================================================
 alias yt='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[height<=1080][vcodec^=avc1]/best[ext=mp4]/best" --merge-output-format mp4'
 alias play='celluloid'
 alias cut='~/.bin/cut.sh'
-
