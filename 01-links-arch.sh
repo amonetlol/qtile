@@ -8,6 +8,7 @@ chmod +x $DIR/bin/*
 ln -sf $DIR/.aliases ~/.aliases
 ln -sf $DIR/.aliases-arch ~/.aliases-arch
 ln -sf $DIR/.bashrc ~/.bashrc
+ln -sf $DIR/.functions ~/.functions
 ln -sf $DIR/config/starship.toml ~/.config/starship.toml
 ln -sf $DIR/config/fastfetch ~/.config/fastfetch
 ln -sf $DIR/config/neofetch ~/.config/neofetch
