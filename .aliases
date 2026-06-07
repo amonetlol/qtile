@@ -153,9 +153,9 @@ alias yt='yt-dlp -f "bestvideo[height<=1080][vcodec^=avc1]+bestaudio[acodec^=mp4
 alias play='celluloid'
 alias cut='~/.bin/cut.sh'
 
-==============================
-FUNÇÕES DISPONÍVEIS
-==============================
+#==============================
+#FUNÇÕES DISPONÍVEIS
+#==============================
 
 alias func='cat << "EOF"
 ==============================
